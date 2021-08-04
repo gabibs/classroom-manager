@@ -19,4 +19,8 @@ public class Student {
     private Boolean approved;
     private Float score;
 
+    public Object getCurrent() {
+        return null;
+    }
+
 }
