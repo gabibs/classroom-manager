@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.List;
 
 @Data
@@ -24,20 +23,23 @@ public class Course {
     private String schedule;
     @OneToOne
     private Classroom classroom;
-    @OneToMany
-    private List<Student> students;
     @ManyToOne
     private Teacher teachers;
+    @OneToMany
+    private List<StudentCourse> studentsList;
 
     public LocalDate getEndDate() {
         return startDate.plusMonths(6);
     }
 
     public void addStudent(Student student) throws FullClassException {
-        if (this.students.size() == classroom.getCapacity()) {
+        StudentCourse studentCourse = new StudentCourse();
+        studentCourse.setStudent(student);
+
+        if (this.studentsList.size() == classroom.getCapacity()) {
             throw new FullClassException();
         } else {
-            this.students.add(student);
+            this.studentsList.add(studentCourse);
         }
     }
 }

@@ -1,7 +1,11 @@
 package com.gbettaglio.classroommanager.services;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.gbettaglio.classroommanager.entities.Course;
 import com.gbettaglio.classroommanager.entities.Student;
+import com.gbettaglio.classroommanager.entities.StudentCourse;
 import com.gbettaglio.classroommanager.exceptions.FullClassException;
 import com.gbettaglio.classroommanager.exceptions.StudentNotFoundException;
 import com.gbettaglio.classroommanager.repository.CourseRepository;
@@ -29,8 +33,10 @@ public class CourseService {
      *  find course, update course
      */
     public void deleteStudentFromCourse(Student student, Course course) {
-
-            course.getStudents().remove(student);
+            List<StudentCourse> filteredList = course.getStudentsList().stream()
+                .filter(studentCourse -> studentCourse.getStudent().getId().equals(student.getId()))
+                .collect(Collectors.toList());
+            course.setStudentsList(filteredList);
             courseRepository.save(course);
 
     }
