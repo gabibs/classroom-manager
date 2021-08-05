@@ -1,7 +1,6 @@
 package com.gbettaglio.classroommanager.entities;
 
 import com.gbettaglio.classroommanager.exceptions.FullClassException;
-import com.gbettaglio.classroommanager.exceptions.StudentNotFoundException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

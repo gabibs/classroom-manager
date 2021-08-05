@@ -7,7 +7,6 @@ import com.gbettaglio.classroommanager.entities.Course;
 import com.gbettaglio.classroommanager.entities.Student;
 import com.gbettaglio.classroommanager.entities.StudentCourse;
 import com.gbettaglio.classroommanager.exceptions.FullClassException;
-import com.gbettaglio.classroommanager.exceptions.StudentNotFoundException;
 import com.gbettaglio.classroommanager.repository.CourseRepository;
 import com.gbettaglio.classroommanager.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +28,7 @@ public class CourseService {
     }
 
     /**
-     *  TODO: delete student from course, create course
-     *  find course, update course
+     *  TODO: create course, find course, update course
      */
     public void deleteStudentFromCourse(Student student, Course course) {
             List<StudentCourse> filteredList = course.getStudentsList().stream()
