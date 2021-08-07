@@ -20,7 +20,6 @@ public class Student {
     @OneToOne
     private PersonalInformation personalInformation;
     private Boolean approved;
-    private Float score;
     @OneToMany
     private List<StudentCourse> courses;
 

@@ -15,6 +15,7 @@ public class StudentCourse {
     @ManyToOne
     private Student student;
     @ManyToOne
+    private Course course;
     private Float score;
 
     

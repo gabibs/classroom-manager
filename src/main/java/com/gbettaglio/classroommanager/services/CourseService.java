@@ -6,7 +6,9 @@ import java.util.stream.Collectors;
 import com.gbettaglio.classroommanager.entities.Course;
 import com.gbettaglio.classroommanager.entities.Student;
 import com.gbettaglio.classroommanager.entities.StudentCourse;
+import com.gbettaglio.classroommanager.entities.Teacher;
 import com.gbettaglio.classroommanager.exceptions.FullClassException;
+import com.gbettaglio.classroommanager.exceptions.UnexistingClassroom;
 import com.gbettaglio.classroommanager.repository.CourseRepository;
 import com.gbettaglio.classroommanager.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +24,12 @@ public class CourseService {
         try {
             course.addStudent(student);
             courseRepository.save(course);
-        } catch (FullClassException e) {
-            // TODO: Handle full class
+        } catch (FullClassException  | UnexistingClassroom e) {
+            
         }
     }
 
-    /**
-     *  TODO: create course, find course
-     */
+    
     public void deleteStudentFromCourse(Student student, Course course) {
             List<StudentCourse> filteredList = course.getStudentsList().stream()
                 .filter(studentCourse -> studentCourse.getStudent().getId().equals(student.getId()))
@@ -39,7 +39,7 @@ public class CourseService {
         }
 
 
-    public void addCourse (Course course) {
+    public void saveCourse (Course course) {
         courseRepository.save(course);   
 
     }
@@ -51,5 +51,10 @@ public class CourseService {
     public List<Course> getAllCoursesByNameAndYear(String name, String yearOfEdition) {
         return  courseRepository.findAllByNameContainsAndYearOfEditionContains(name, yearOfEdition);
         
+    }
+
+    public void addTeacher(Teacher teacher, Course course) {
+        course.setTeachers(teacher);
+        this.saveCourse(course);
     }
 }

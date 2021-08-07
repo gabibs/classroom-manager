@@ -18,11 +18,7 @@ public class StudentService {
     }
 
     public Student getStudent(String lastName, String dni) {
-        return studentRepository.findByPersonalInformationLastNameContainsAndDniContains(lastName, dni);
-    }
-
-    public Student getStudentAndCourse(String student, Integer id){
-        return studentRepository.findByStudentCourseContainsStudentAndIdContains(student, id);
+        return studentRepository.findByPersonalInformationLastNameContainsAndPersonalInformationDniContains(lastName, dni);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.gbettaglio.classroommanager.services;
 
-import com.gbettaglio.classroommanager.entities.Student;
+
 import com.gbettaglio.classroommanager.entities.Teacher;
 import com.gbettaglio.classroommanager.repository.TeacherRepository;
 
@@ -17,6 +17,6 @@ public class TeacherService {
 
     public void deleteTeacher(Teacher teacher) {
         teacherRepository.delete(teacher);
-    }
+    } 
 
 }

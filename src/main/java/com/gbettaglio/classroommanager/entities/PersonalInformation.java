@@ -14,8 +14,8 @@ public class PersonalInformation {
 
     @Id
     private Integer id;
-    private String lastNames;
-    private String firstNames;
+    private String lastName;
+    private String firstName;
     private String dni;
     private String mainAddress;
     private String phoneNbr;
