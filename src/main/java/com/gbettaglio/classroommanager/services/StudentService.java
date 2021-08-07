@@ -17,6 +17,12 @@ public class StudentService {
         studentRepository.delete(student);
     }
 
-    
+    public Student getStudent(String lastName, String dni) {
+        return studentRepository.findByPersonalInformationLastNameContainsAndDniContains(lastName, dni);
+    }
+
+    public Student getStudentCourse(String student, Integer id){
+        return studentRepository.findByStudentCourseContainsStudentAndIdContains(student, id);
+    }
 
 }

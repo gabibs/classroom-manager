@@ -28,7 +28,7 @@ public class CourseService {
     }
 
     /**
-     *  TODO: create course, find course, update course
+     *  TODO: create course, find course
      */
     public void deleteStudentFromCourse(Student student, Course course) {
             List<StudentCourse> filteredList = course.getStudentsList().stream()
@@ -36,6 +36,20 @@ public class CourseService {
                 .collect(Collectors.toList());
             course.setStudentsList(filteredList);
             courseRepository.save(course);
+        }
 
+
+    public void addCourse (Course course) {
+        courseRepository.save(course);   
+
+    }
+    public void deleteCourse (Course course) {
+        courseRepository.delete(course);   
+
+    }
+
+    public List<Course> getAllCoursesByNameAndYear(String name, String yearOfEdition) {
+        return  courseRepository.findAllByNameContainsAndYearOfEditionContains(name, yearOfEdition);
+        
     }
 }

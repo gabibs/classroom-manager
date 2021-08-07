@@ -1,11 +1,14 @@
 package com.gbettaglio.classroommanager.entities;
 
 import com.gbettaglio.classroommanager.exceptions.FullClassException;
+import com.gbettaglio.classroommanager.exceptions.UnexistingClassroom;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -25,15 +28,19 @@ public class Course {
     @ManyToOne
     private Teacher teachers;
     @OneToMany
-    private List<StudentCourse> studentsList;
+    private List<StudentCourse> studentsList = new ArrayList<StudentCourse>();
 
     public LocalDate getEndDate() {
         return startDate.plusMonths(6);
     }
 
-    public void addStudent(Student student) throws FullClassException {
+    public void addStudent(Student student) throws FullClassException, UnexistingClassroom {
         StudentCourse studentCourse = new StudentCourse();
         studentCourse.setStudent(student);
+        
+        if (classroom == null) {
+            throw new UnexistingClassroom();
+        }
 
         if (this.studentsList.size() == classroom.getCapacity()) {
             throw new FullClassException();
