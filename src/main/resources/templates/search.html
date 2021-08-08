@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Search Demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h1>Instituto de Investigaciones Filológicas Emilio Disi</h1>
+    <h2>Ingrese criterios de búsqueda</h2>
+    <label>Buscar por:</label>
+    <div class="topnav">
+        <!-- Tab links -->
+        <div class="tab">
+            <button class="tablinks" onclick="openCurso(event, 'Curso')">CURSO</button>
+            <button class="tablinks" onclick="openAlumno(event, 'Alumno')">ALUMNO</button>
+            <button class="tablinks" onclick="openLista(event, 'ListaAlumnos')">LISTA DE ALUMNOS</button>
+        </div>
+
+        <!-- Tab content -->
+        <div id="Curso" class="tabcontent">
+            <h3>CURSO</h3>
+            <input type="text" placeholder="Buscar...">
+        </div>
+
+        <div id="Alumno" class="tabcontent">
+            <h3>ALUMNO</h3>
+            <input type="text" placeholder="Buscar...">
+        </div>
+
+        <div id="ListaAlumnos" class="tabcontent">
+            <h3>LISTA DE ALUMNOS</h3>
+            <input type="text" placeholder="Buscar...">
+        </div>
+    </div>
+
+</body>
+
+</html>

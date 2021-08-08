@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Alta/Modificación Alumno</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+  <h1>Instituto de Investigaciones Filológicas Emilio Disi</h1>
+  <h2>Alta/Modificación Alumno</h2>
+  <div class="container">
+    <form action="action_page.php">
+      <div class="row">
+        <div class="col-25">
+          <label for="apellido">Apellido</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="apellido" name="apellido" placeholder="Ingrese Apellido/s">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="nombre">Nombre/s</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="nombre" name="nombre" placeholder="Ingrese nombre/s">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="country">DNI</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="dni" name="dni" placeholder="xx.xxx.xxx">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="dni">Dirección</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="dirección" name="dni" placeholder="Ingrese dirección">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="telefono">Teléfono</label>
+        </div>
+        <div class="col-75">
+          <input type="tel" id="telefono" name="telefono" placeholder="+54 9 221 5555555">
+        </div>
+      </div>
+      <div class="row">
+        <div class="row">
+          <div class="col-25">
+            <label for="email">Mail</label>
+          </div>
+          <div class="col-75">
+            <input type="email" id="email" name="email" placeholder="nombre_de_usuario@ejemplo.com">
+          </div>
+        </div>
+        <div class="row">
+          <input type="submit" value="Submit"> HOW TO CANCEEEEEL!!
+        </div>
+        <div class="row">
+          <button type="reset">CANCELAR</button>
+          <button type="submit">GUARDAR</button>
+        </div>
+    </form>
+  </div>
+</body>
+
+</html>
