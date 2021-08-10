@@ -16,4 +16,8 @@ public class ClassroomService {
         classroomRepository.delete(classroom);
     }
 
+    public void saveCapacity(Classroom capacity) {
+        classroomRepository.save(capacity);
+    }
+
 }

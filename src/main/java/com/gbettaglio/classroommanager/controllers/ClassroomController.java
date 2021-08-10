@@ -3,6 +3,7 @@ package com.gbettaglio.classroommanager.controllers;
 import com.gbettaglio.classroommanager.entities.Classroom;
 import com.gbettaglio.classroommanager.services.ClassroomService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ClassroomController {
 
-	private ClassroomService classroomService;
+	@Autowired
+	ClassroomService classroomService;
 	private Model model;
 
 	@GetMapping("/classroom") // html

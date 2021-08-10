@@ -1,5 +1,6 @@
 package com.gbettaglio.classroommanager.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import com.gbettaglio.classroommanager.entities.Course;
 import com.gbettaglio.classroommanager.entities.Student;
@@ -19,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CourseController {
 
-    private CourseService courseService;
+    @Autowired
+    CourseService courseService;
+
     private Model model;
 
     // mapear curso
