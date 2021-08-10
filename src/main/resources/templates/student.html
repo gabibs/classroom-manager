@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Alta/Modificación Alumno</title>
+  <title>Alumno</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
@@ -52,21 +52,33 @@
         </div>
       </div>
       <div class="row">
-        <div class="row">
-          <div class="col-25">
-            <label for="email">Mail</label>
-          </div>
-          <div class="col-75">
-            <input type="email" id="email" name="email" placeholder="nombre_de_usuario@ejemplo.com">
-          </div>
+        <div class="col-25">
+          <label for="email">Mail</label>
         </div>
-        <div class="row">
-          <input type="submit" value="Submit"> HOW TO CANCEEEEEL!!
+        <div class="col-75">
+          <input type="email" id="email" name="email" placeholder="nombre_de_usuario@ejemplo.com">
         </div>
-        <div class="row">
-          <button type="reset">CANCELAR</button>
-          <button type="submit">GUARDAR</button>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="score">Promedio actual</label>
         </div>
+        <div class="col-75">
+          <input type="text" id="score" name="score" placeholder="Sin calificaciones disponibles">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="approved">Aprobado</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="approved" name="approved" placeholder="Sin promedio disponibles">
+        </div>
+      </div>
+      <div class="row">
+        <button type="reset">CANCELAR</button>
+        <button type="submit">GUARDAR</button>
+      </div>
     </form>
   </div>
 </body>
