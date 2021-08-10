@@ -24,37 +24,38 @@ public class CourseService {
         try {
             course.addStudent(student);
             courseRepository.save(course);
-        } catch (FullClassException  | UnexistingClassroom e) {
-            
+        } catch (FullClassException | UnexistingClassroom e) {
+
         }
     }
 
-    
     public void deleteStudentFromCourse(Student student, Course course) {
-            List<StudentCourse> filteredList = course.getStudentsList().stream()
+        List<StudentCourse> filteredList = course.getStudentsList().stream()
                 .filter(studentCourse -> studentCourse.getStudent().getId().equals(student.getId()))
                 .collect(Collectors.toList());
-            course.setStudentsList(filteredList);
-            courseRepository.save(course);
-        }
+        course.setStudentsList(filteredList);
+        courseRepository.save(course);
+    }
 
-
-    public void saveCourse (Course course) {
-        courseRepository.save(course);   
+    public CourseService saveCourse(Course course) {
+        courseRepository.save(course);
+        return null;
 
     }
-    public void deleteCourse (Course course) {
-        courseRepository.delete(course);   
+
+    public void deleteCourse(Course course) {
+        courseRepository.delete(course);
 
     }
 
     public List<Course> getAllCoursesByNameAndYear(String name, String yearOfEdition) {
-        return  courseRepository.findAllByNameContainsAndYearOfEditionContains(name, yearOfEdition);
-        
+        return courseRepository.findAllByNameContainsAndYearOfEditionContains(name, yearOfEdition);
+
     }
 
     public void addTeacher(Teacher teacher, Course course) {
         course.setTeachers(teacher);
         this.saveCourse(course);
     }
+
 }
