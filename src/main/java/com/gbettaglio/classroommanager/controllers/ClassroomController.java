@@ -1,7 +1,7 @@
 package com.gbettaglio.classroommanager.controllers;
 
-
 import com.gbettaglio.classroommanager.entities.Classroom;
+import com.gbettaglio.classroommanager.services.ClassroomService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,19 +11,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ClassroomController {
-	
-	@GetMapping("/classroom") //html
+
+	private ClassroomService classroomService;
+	private Model model;
+
+	@GetMapping("/classroom") // html
 	public String managerForm(Model model) {
-		model.addAttribute("classroom"); //data
-		return "classroom"; //templates
+		model.addAttribute("classroom"); // data
+		return "classroom"; // template
 	}
 
-    @PostMapping("/classroom")
-	public Integer classroomSubmit(@ModelAttribute Classroom classroom, Integer id, Integer capacity) {
+	// modificar/guardar nuevo
+	@PostMapping("/classroom")
+	public String classroomSubmit(@ModelAttribute Classroom classroom) {
+		classroomService.saveClassroom(classroom);
+		model.addAttribute("classroom", new ClassroomService());
+		return "classroom";
+	}
 
-        Classroom.setCapacity(capacity);
-        return null;
-		
+	// eliminar
+	@PostMapping("/classroom")
+	public String classroomDelete(@ModelAttribute Classroom classroom) {
+		classroomService.deleteClassroom(classroom);
+		return "classroom";
 	}
 }
-

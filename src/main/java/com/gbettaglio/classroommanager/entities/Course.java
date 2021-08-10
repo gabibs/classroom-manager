@@ -34,10 +34,10 @@ public class Course {
         return startDate.plusMonths(6);
     }
 
-    public void addStudent(Student student) throws FullClassException, UnexistingClassroom {
+    public void saveStudent(Student student) throws FullClassException, UnexistingClassroom {
         StudentCourse studentCourse = new StudentCourse();
         studentCourse.setStudent(student);
-        
+
         if (classroom == null) {
             throw new UnexistingClassroom();
         }

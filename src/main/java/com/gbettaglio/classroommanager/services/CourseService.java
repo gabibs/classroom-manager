@@ -20,9 +20,9 @@ public class CourseService {
     @Autowired
     StudentRepository studentRepository;
 
-    public void addStudentToCourse(Student student, Course course) {
+    public void saveStudentToCourse(Student student, Course course) {
         try {
-            course.addStudent(student);
+            course.saveStudent(student);
             courseRepository.save(course);
         } catch (FullClassException | UnexistingClassroom e) {
 
