@@ -15,7 +15,7 @@
             <form>
                 <input type="number" placeholder="Ingrese número máximo de alumnos" name="search">
                 <button type="reset">CANCELAR</button>
-                <button type="submit">GUARDAR</button>
+                <button type="submit" th:action="@/classroom" th:object="${classroom}" method="POST">GUARDAR</button>
             </form>
         </div>
     </div>

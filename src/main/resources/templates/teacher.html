@@ -77,7 +77,7 @@
             </div>
             <div class="row">
                 <button type="reset">CANCELAR</button>
-                <button type="submit">GUARDAR</button>
+                <button type="submit" th:action="@/teacher" th:object="${teacher}" method="POST">GUARDAR</button>
             </div>
         </form>
     </div>

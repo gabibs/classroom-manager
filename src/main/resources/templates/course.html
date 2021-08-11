@@ -16,7 +16,7 @@
 
                 <input type="tel" placeholder="Ingrese número máximo de alumnos" name="search">
                 <button type="reset">CANCELAR</button>
-                <button type="submit">GUARDAR</button>
+                <button type="submit" th:action="@/course" th:object="${course}" method="POST">GUARDAR</button>
             </form>
         </div>
     </div>
