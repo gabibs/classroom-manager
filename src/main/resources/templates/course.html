@@ -10,13 +10,24 @@
     <h1>Instituto de Investigaciones Filológicas Emilio Disi</h1>
     <h2>Alta/Modificación de Curso</h2>
     <div class="topnav">
-        <a class="active" href="#capacity">Capacidad del aula</a>
+
         <div class="search-container">
             <form>
+                <div>
+                    <label for="searchCourse">Ingrese nombre del Curso</label>
+                    <input type="text" placeholder="Ingrese Nombre del curso" name="searchCourse">
+                    <label for="student">Ingrese Apellido del estudiante </label>
+                    <input type="text" placeholder="Ingrese Apellido" name="student">
+                    <label for="student">Ingrese DNI del estudiante Estudiante</label>
+                    <input type="text" placeholder="Ingrese DNI" name="student">
+                    <button type="reset">CANCELAR</button>
+                    <button type="submit" th:action="@/course" th:object="${course}" method="POST">SUBMITIR</button>
+                </div>
 
-                <input type="tel" placeholder="Ingrese número máximo de alumnos" name="search">
+                <label for="teacher">Ingrese Profesor (sólo en caso de ingresar un nuevo curso)</label>
+                <input type="text" placeholder="Ingrese Apellido del Profesor" name="teacher">
                 <button type="reset">CANCELAR</button>
-                <button type="submit" th:action="@/course" th:object="${course}" method="POST">GUARDAR</button>
+                <button type="submit" th:action="@/course" th:object="${course}" method="POST">SUBMITIR</button>
             </form>
         </div>
     </div>

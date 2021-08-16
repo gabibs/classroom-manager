@@ -6,18 +6,50 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+</style>
+
 <body>
     <h1>Instituto de Investigaciones Filológicas Emilio Disi</h1>
     <h2>Alta/Modificación de Aula</h2>
-    <div class="topnav">
-        <a class="active" href="#capacity">Capacidad del aula</a>
-        <div class="search-container">
-            <form>
-                <input type="number" placeholder="Ingrese número máximo de alumnos" name="search">
-                <button type="reset">CANCELAR</button>
-                <button type="submit" th:action="@/classroom" th:object="${classroom}" method="POST">GUARDAR</button>
-            </form>
-        </div>
+    <div>
+        <h2>Crear aula</h2>
+        <form action="#" th:action="@{/classroom}" th:object="${classroom}" method="post">
+            <p>Número de aula: <input type="hidden" disabled th:field="*{id}" /></p>
+            <p>Capacidad: <input type="number" th:field="*{capacity}" /></p>
+            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        </form>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>N° de aula</th>
+                <th>Capacidad</th>
+                <th>Editar</th>
+                <th>Borrar</th>
+            </tr>
+            <tr th:if="${classrooms.empty}">
+                <td colspan="2"> No existen aulas</td>
+            </tr>
+            <tr th:each="classr : ${classrooms}">
+                <td><span th:text="${classr.id}"> Title </span></td>
+                <td><span th:text="${classr.capacity}"> Author </span></td>
+                <td><a th:href="@{'/classroom?id=' + ${classr.id}}" th:method="get">Editar</a></td>
+                <td><a th:href="@{'/classroom/' + ${classr.id}}" th:method="delete">Borrar</a></td>
+            </tr>
+        </table>
     </div>
 </body>
 

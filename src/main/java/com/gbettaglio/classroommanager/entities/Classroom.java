@@ -1,6 +1,5 @@
 package com.gbettaglio.classroommanager.entities;
 
-
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -17,16 +16,11 @@ public class Classroom {
     private Integer id;
     private Integer capacity;
 
-    
-
-    public static void setCapacity(Integer capacity) {
+    public static void saveCapacity(Integer capacity) {
     }
-
-
 
     public int getCapacity() {
         return 0;
     }
 
-    
 }

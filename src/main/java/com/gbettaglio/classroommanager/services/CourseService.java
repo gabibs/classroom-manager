@@ -12,7 +12,9 @@ import com.gbettaglio.classroommanager.exceptions.UnexistingClassroom;
 import com.gbettaglio.classroommanager.repository.CourseRepository;
 import com.gbettaglio.classroommanager.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CourseService {
     @Autowired
     CourseRepository courseRepository;
@@ -48,8 +50,13 @@ public class CourseService {
 
     }
 
-    public List<Course> getAllCoursesByNameAndYear(String name, String yearOfEdition) {
+    public List<Course> findAllCourses(String name, String yearOfEdition) {
         return courseRepository.findAllByNameContainsAndYearOfEditionContains(name, yearOfEdition);
+
+    }
+
+    public Course findCourse(String name, String yearOfEdition) {
+        return courseRepository.findByNameContainsAndYearOfEditionContains(name, yearOfEdition);
 
     }
 

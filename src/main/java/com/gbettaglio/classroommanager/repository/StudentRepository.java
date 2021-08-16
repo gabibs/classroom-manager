@@ -8,10 +8,9 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface StudentRepository extends CrudRepository<Student, Integer> {
 
-    List<Student> findByPersonalInformationLastNameContainsAndPersonalInformationDniContains(String lastName,
-            String dni);
+        Student findByPersonalInformationLastNameContainsAndPersonalInformationDniContains(String lastName, String dni);
 
-    List<Student> findAllByPersonalInformationLastNameContainsAndPersonalInformationDniContains(String lastName,
-            String dni);
+        List<Student> findAllByPersonalInformationLastNameContainsAndPersonalInformationDniContains(String lastName,
+                        String dni);
 
 }

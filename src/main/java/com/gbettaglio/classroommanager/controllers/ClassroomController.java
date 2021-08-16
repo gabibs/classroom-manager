@@ -8,7 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class ClassroomController {
@@ -18,8 +22,13 @@ public class ClassroomController {
 	private Model model;
 
 	@GetMapping("/classroom") // html
-	public String managerForm(Model model) {
-		model.addAttribute("classroom"); // data
+	public String managerForm(@RequestParam(name = "id", required = false) Integer id, Model model) {
+		if (id != null) {
+			model.addAttribute("classroom", classroomService.findClassroom(id));
+		} else {
+			model.addAttribute("classroom", new Classroom());
+		}
+		model.addAttribute("classrooms", classroomService.findAllClassrooms());
 		return "classroom"; // template
 	}
 
@@ -28,13 +37,18 @@ public class ClassroomController {
 	public String classroomSubmit(@ModelAttribute Classroom classroom) {
 		classroomService.saveClassroom(classroom);
 		model.addAttribute("classroom", new ClassroomService());
+		List<Classroom> allClassrooms = classroomService.findAllClassrooms();
+		model.addAttribute("classrooms", allClassrooms);
 		return "classroom";
 	}
 
 	// eliminar
-	@PostMapping("/classroom")
-	public String classroomDelete(@ModelAttribute Classroom classroom) {
-		classroomService.deleteClassroom(classroom);
+	@PostMapping("/deleteClassroom/{id}")
+	public String classroomDelete(@PathVariable Integer id, Model model) {
+		classroomService.deleteClassroom(id);
+		model.addAttribute("classroom", new Classroom()); // data
+		List<Classroom> allClassrooms = classroomService.findAllClassrooms();
+		model.addAttribute("classrooms", allClassrooms);
 		return "classroom";
 	}
 }
