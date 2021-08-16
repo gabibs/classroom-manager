@@ -30,12 +30,11 @@
         <h2>Crear curso</h2>
         <form action="#" th:action="@{/course}" th:object="${course}" method="post">
             <p>Nombre: <input type="text" th:field="*{name}" /></p>
+            <p>Aula: <input type="text" th:field="*{classroom.id}" /></p>
             <p>Fecha de inicio: <input type="date" th:field="*{startDate}" /></p>
             <p>Año de Edición: <input type="text" th:field="*{yearOfEdition}" /></p>
             <p>Precio: <input type="number" th:field="*{price}" /></p>
             <p>Horario: <input type="text" th:field="*{schedule}" /></p>
-            <p>Aula: <input type="number" th:field="*{classroom?id}" /></p>
-            <p>Profesor: <input type="number" th:field="*{course.teacher?id}" /></p>
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
         </form>
     </div>
@@ -43,13 +42,16 @@
         <h2>Editar curso</h2>
         <form action="#" th:action="@{'/course?id=' + ${course.id}}" th:object="${course}" method="post">
             <p>Nombre: <input type="text" th:field="*{name}" /></p>
-            <p>Fecha de inicio: <input type="date" th:field="*{startDate}" /></p>
-            <p>Fecha de Finalización: <input type="date" th:field="*{endDate}" /></p>
+            <p>Aula: <input type="text" th:field="*{classroom.id}" /></p>
+            <p>Fecha de inicio: <input type="date" th:field="*{startDate}"
+                    th:value="${#temporals.format(fromStartDate,'yyyy-MM-dd')}" /></p>
+            <p>Fecha de Finalización: <input type="date" th:field="*{endDate}"
+                    th:value="${#temporals.format(fromEndDate,'yyyy-MM-dd')}" /></p>
             <p>Año de Edición: <input type="text" th:field="*{yearOfEdition}" /></p>
             <p>Precio: <input type="number" th:field="*{price}" /></p>
-            <p>Horario: <input type="text" th:field="*{schedule}" /></p>
-            <p>Aula: <input type="number" th:field="*{classroom?id}" /></p>
-            <p>Profesor: <input type="number" th:field="*{course.teacher?id}" /></p>
+            <p>Horario: <input type="text" th:field="*{schedule}"
+                    th:value="${#temporals.format(fromScheduleDate,'yyyy-MM-dd')}" /></p>
+            <p>Profesor: <input type="number" th:field="*{teacher.id}" /></p>
             <p>Alumnos inscriptos: <input type="text" th:field="*{course.studentsList}" /></p>
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
         </form>
@@ -69,6 +71,13 @@
             </tr>
             <tr th:each="course : ${courses}">
                 <td><span th:text="${course.name}"> Curso </span></td>
+                <td><span th:text="${course.startDate}" th:value="${#temporals.format(fromStartDate,'yyyy-MM-dd')}">
+                        Curso
+                    </span></td>
+                <td><span th:text="${course.endDate}" th:value="${#temporals.format(fromEndDate,'yyyy-MM-dd')}"> Curso
+                    </span></td>
+                <td><span th:text="${course.schedule}" th:value="${#temporals.format(fromSchedule,'yyyy-MM-dd')}"> Curso
+                    </span></td>
                 <td><span th:text="${teacher.personalInformation.lastName}"> Apellido </span></td>
                 <td><span th:text="${student.id}"> Alumno - Legajo N° </span></td>
                 <td><span th:text="${student.personalInformation.lastName}"> Apellido </span></td>

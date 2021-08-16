@@ -6,6 +6,9 @@ import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.time.LocalDate;
@@ -25,8 +28,14 @@ public class PersonalInformation {
     private String mainAddress;
     private String phoneNbr;
     private String email;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate admissionDate;
+
     private String professionalTitle;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private String professionalRegistration;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate professionalTitleDate;
 }

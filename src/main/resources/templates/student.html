@@ -83,7 +83,8 @@
           <label for="admissionDate">Fecha de Ingreso</label>
         </div>
         <div class="col-75">
-          <input type="date" id="admissionDate" name="admissionDate">
+          <input type="date" id="admissionDate" name="admissionDate"
+            th:value="${#temporals.format(fromAdmissionDate,'yyyy-MM-dd')}">
         </div>
       </div>
       <div class="row">
@@ -121,7 +122,8 @@
           <td><span th:text="${student.id}"></span></td>
           <td><span th:text="${student.personalInformation.lastName}"></span></td>
           <td><span th:text="${student.personalInformation.dni}"></span></td>
-          <td><span th:text="${student.personalInformation.admissionDate}"></span></td>
+          <td><span th:text="${student.personalInformation.admissionDate}"
+              th:value="${#temporals.format(fromAdmissionDate,'yyyy-MM-dd')}"></span></td>
           <td><span th: if="{student.courses != null}" th:text="${student.courses}"></span></td>
           <td><a th:href="@{'/student?id=' + ${student.id}}" th:method="get">Editar</a></td>
           <td><a th:href="@{'/deleteStudent/' + ${student.id}}" th:method="delete">Borrar</a></td>

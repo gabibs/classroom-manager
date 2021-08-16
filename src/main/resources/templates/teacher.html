@@ -81,7 +81,8 @@
                     <label for="admissionDate">Fecha de Ingreso</label>
                 </div>
                 <div class="col-75">
-                    <input type="date" id="admissionDate" name="admissionDate">
+                    <input type="date" id="professionalRegistration"
+                        th:value="${#temporals.format(fromProfessionalRegistration,'yyyy-MM-dd')}">
                 </div>
             </div>
             <div class="row">
@@ -97,7 +98,8 @@
                     <label for="titulacion">Fecha Titulación</label>
                 </div>
                 <div class="col-75">
-                    <input type="date" id="titulacion" name="titulacion" placeholder="dd/mm/aaaa">
+                    <input type="date" id="professionalTitleDate" name="professionalTitleDate"
+                        th:value="${#temporals.format(fromProfessionalTitleDate,'yyyy-MM-dd')}">
                 </div>
             </div>
             <div class="row">

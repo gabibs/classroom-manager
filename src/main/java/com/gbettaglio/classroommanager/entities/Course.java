@@ -3,6 +3,8 @@ package com.gbettaglio.classroommanager.entities;
 import com.gbettaglio.classroommanager.exceptions.FullClassException;
 import com.gbettaglio.classroommanager.exceptions.UnexistingClassroom;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -24,6 +26,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate startDate;
     private String yearOfEdition;
     private Double price = 0.00d;

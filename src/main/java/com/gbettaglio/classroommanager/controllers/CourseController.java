@@ -1,5 +1,7 @@
 package com.gbettaglio.classroommanager.controllers;
 
+import com.gbettaglio.classroommanager.services.ClassroomService;
+import com.gbettaglio.classroommanager.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import com.gbettaglio.classroommanager.entities.Course;
@@ -21,8 +23,10 @@ public class CourseController {
 
     @Autowired
     CourseService courseService;
-
-    private Model model;
+    @Autowired
+    ClassroomService classroomService;
+    @Autowired
+    TeacherService teacherService;
 
     // mapear curso
     @GetMapping("/course") // html
@@ -34,21 +38,29 @@ public class CourseController {
         } else {
             model.addAttribute("course", new Course());
         }
-        model.addAttribute("courses", courseService.findAllCourses(name, yearOfEdition));
+        model.addAttribute("courses", courseService.findAllCourses());
         return "course"; // template
     }
 
     // modificar/guardar curso
     @PostMapping("/course")
-    public String classroomSubmit(@ModelAttribute Course course, String name, String yearOfEdition, Integer id) {
+    public String classroomSubmit(@ModelAttribute Course course, Model model, String name, String yearOfEdition,
+            Integer id) {
         if (id != null) {
             course.setId(id);
         }
-        courseService.saveCourse(course);
-        model.addAttribute("course", new CourseService());
-        List<Course> allCourses = courseService.findAllCourses(name, yearOfEdition);
-        model.addAttribute("course", allCourses);
-        return "classroom";
+        // Si se especificó un aula y el aula no existe, devolver error
+        if (course.getClassroom().getId() != null
+                && classroomService.findClassroom(course.getClassroom().getId()).getId() == null) {
+            model.addAttribute("error", "Aula inexistente");
+            model.addAttribute("course", course);
+        } else {
+            courseService.saveCourse(course);
+            model.addAttribute("course", new Course());
+        }
+        List<Course> allCourses = courseService.findAllCourses();
+        model.addAttribute("courses", allCourses);
+        return "course";
     }
 
     // buscar curso
