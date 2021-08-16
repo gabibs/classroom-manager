@@ -22,12 +22,22 @@
 </style>
 
 <body>
+    <div>
+        <a href="http://localhost:8080/" type="submit">VOLVER</a>
+    </div>
     <h1>Instituto de Investigaciones Filológicas Emilio Disi</h1>
     <h2>Alta/Modificación de Aula</h2>
-    <div>
+    <div th:if="${classroom.id == null}">
         <h2>Crear aula</h2>
         <form action="#" th:action="@{/classroom}" th:object="${classroom}" method="post">
-            <p>Número de aula: <input type="hidden" disabled th:field="*{id}" /></p>
+            <p>Capacidad: <input type="number" th:field="*{capacity}" /></p>
+            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        </form>
+    </div>
+    <div th:if="${classroom.id != null}">
+        <h2>Editar aula</h2>
+        <form action="#" th:action="@{'/classroom?id=' + ${classroom.id}}" th:object="${classroom}" method="post">
+            <p>Número de aula: <input type="number" disabled th:field="*{id}" /></p>
             <p>Capacidad: <input type="number" th:field="*{capacity}" /></p>
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
         </form>
@@ -47,7 +57,7 @@
                 <td><span th:text="${classr.id}"> Title </span></td>
                 <td><span th:text="${classr.capacity}"> Author </span></td>
                 <td><a th:href="@{'/classroom?id=' + ${classr.id}}" th:method="get">Editar</a></td>
-                <td><a th:href="@{'/classroom/' + ${classr.id}}" th:method="delete">Borrar</a></td>
+                <td><a th:href="@{'/deleteClassroom/' + ${classr.id}}" th:method="delete">Borrar</a></td>
             </tr>
         </table>
     </div>

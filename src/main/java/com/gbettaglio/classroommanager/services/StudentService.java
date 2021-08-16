@@ -1,6 +1,8 @@
 package com.gbettaglio.classroommanager.services;
 
 import java.util.List;
+import java.util.stream.StreamSupport;
+import java.util.stream.Collectors;
 
 import com.gbettaglio.classroommanager.entities.Student;
 import com.gbettaglio.classroommanager.repository.StudentRepository;
@@ -29,6 +31,10 @@ public class StudentService {
     public List<Student> getAllStudents(String lastName, String dni) {
         return studentRepository.findAllByPersonalInformationLastNameContainsAndPersonalInformationDniContains(lastName,
                 dni);
+    }
+
+    public List<Student> getAllStudents() {
+        return StreamSupport.stream(studentRepository.findAll().spliterator(), false).collect(Collectors.toList());
     }
 
 }

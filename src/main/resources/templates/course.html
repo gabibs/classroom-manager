@@ -1,5 +1,19 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+</style>
 
 <head>
     <title>Curso</title>
@@ -7,28 +21,57 @@
 </head>
 
 <body>
+    <div>
+        <a href="http://localhost:8080/" type="submit">VOLVER</a>
+    </div>
     <h1>Instituto de Investigaciones Filológicas Emilio Disi</h1>
     <h2>Alta/Modificación de Curso</h2>
     <div class="topnav">
 
         <div class="search-container">
-            <form>
+            <form th:action="@{/course}" th:object="${course}" method="POST">
                 <div>
                     <label for="searchCourse">Ingrese nombre del Curso</label>
-                    <input type="text" placeholder="Ingrese Nombre del curso" name="searchCourse">
+                    <input type="text" placeholder="" name="searchCourse">
                     <label for="student">Ingrese Apellido del estudiante </label>
-                    <input type="text" placeholder="Ingrese Apellido" name="student">
-                    <label for="student">Ingrese DNI del estudiante Estudiante</label>
-                    <input type="text" placeholder="Ingrese DNI" name="student">
+                    <input type="text" placeholder="" name="student">
+                    <label for="student">Ingrese DNI del estudiante</label>
+                    <input type="text" placeholder="" name="student">
                     <button type="reset">CANCELAR</button>
-                    <button type="submit" th:action="@/course" th:object="${course}" method="POST">SUBMITIR</button>
+                    <button type="submit">SUBMITIR</button>
                 </div>
 
                 <label for="teacher">Ingrese Profesor (sólo en caso de ingresar un nuevo curso)</label>
                 <input type="text" placeholder="Ingrese Apellido del Profesor" name="teacher">
                 <button type="reset">CANCELAR</button>
-                <button type="submit" th:action="@/course" th:object="${course}" method="POST">SUBMITIR</button>
+                <button type="submit">SUBMITIR</button>
             </form>
+            <div>
+                <table>
+                    <tr>
+                        <th>Curso</th>
+                        <th>Apellido Profesor</th>
+                        <th>Alumno - Legajo N°</th>
+                        <th>Apellido Alumno</th>
+                        <th>Nota</th>
+                        <th>Aprobado</th>
+                    </tr>
+                    <tr th:if="${courses.empty}">
+                        <td colspan="2"> No existen cursos</td>
+                    </tr>
+                    <tr th:each="course : ${courses}">
+                        <td><span th:text="${course.name}"> Curso </span></td>
+                        <td><span th:text="${teacher.personalInformation.lastName}"> Apellido </span></td>
+                        <td><span th:text="${student.id}"> Alumno - Legajo N° </span></td>
+                        <td><span th:text="${student.personalInformation.lastName}"> Apellido </span></td>
+                        <td><span th:text="${student.score}"> Nota </span></td>
+                        <td><span th:if="${student.score >= 4}"> Sí </span></td>
+                        <td><span th:if="${student.score < 4}"> No </span></td>
+                        <td><a th:href="@{'/course?id=' + ${course.id}}" th:method="get">Editar</a></td>
+                        <td><a th:href="@{'/deleteCourse/' + ${course.id}}" th:method="delete">Borrar</a></td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </body>

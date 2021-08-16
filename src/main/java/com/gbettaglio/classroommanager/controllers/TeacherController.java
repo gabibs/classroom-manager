@@ -20,43 +20,44 @@ public class TeacherController {
     TeacherService teacherService;
 
     @GetMapping("/teacher") // html
-    public String managerForm(@RequestParam(name = "dni", required = false) String lastName, String dni, Model model) {
+    public String managerForm(@RequestParam(name = "lastName", required = false) String lastName,
+            @RequestParam(name = "dni", required = false) String dni, Model model) {
         if (dni != null) {
             model.addAttribute("teacher", teacherService.getTeacher(lastName, dni));
         } else {
             model.addAttribute("teacher", new Teacher());
         }
-        model.addAttribute("teacher", teacherService.getAllTeachers(lastName, dni));
+        model.addAttribute("teachers", teacherService.getAllTeachers());
         return "teacher"; // template
     }
 
     // modificar/guardar nuevo
     @PostMapping("/teacher")
-    public String classroomSubmit(@RequestParam(value = "dni", required = false) String lastName, String dni,
+    public String classroomSubmit(String lastName, @RequestParam(value = "dni", required = false) String dni,
             Model model, Teacher teacher) {
         teacherService.saveTeacher(teacher);
         model.addAttribute("teacher", new TeacherService());
-        List<Teacher> allTeachers = teacherService.getAllTeachers(lastName, dni);
-        model.addAttribute("allTeachers", allTeachers);
+        List<Teacher> teachers = teacherService.getAllTeachers();
+        model.addAttribute("teachers", teachers);
         return "teacher";
     }
 
     // eliminar
     @PostMapping("/deleteTeacher/{dni}")
-    public String deleteTeacher(@PathVariable Teacher teacher, Model model, String lastName, String dni) {
+    public String deleteTeacher(@PathVariable Teacher teacher, Model model, String lastName, @PathVariable String dni) {
         teacherService.deleteTeacher(teacher);
         model.addAttribute("teacher", new Teacher()); // data
-        List<Teacher> allTeachers = teacherService.getAllTeachers(lastName, dni);
-        model.addAttribute("teacher", allTeachers);
+        List<Teacher> teachers = teacherService.getAllTeachers(lastName, dni);
+        model.addAttribute("teachers", teachers);
         return "teacher";
     }
 
     // búsqueda
-    @GetMapping("/teacherSearch")
-    public String teacherForm(@RequestParam(value = "dni", required = false) String dni,
+    @GetMapping("/teacherSearch/{dni}")
+    public String teacherForm(@PathVariable String dni,
             @RequestParam(value = "lastName", required = false) String lastName, Model model) {
-        List<Teacher> teacherList = teacherService.getAllTeachers(dni, lastName);
-        model.addAttribute("teacherList", teacherList);
+        List<Teacher> teachers = teacherService.getAllTeachers(dni, lastName);
+        model.addAttribute("teachers", teachers);
         return "teacher";
 
     }

@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.time.LocalDate;
 
 @Data
@@ -13,6 +15,7 @@ import java.time.LocalDate;
 public class PersonalInformation {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String lastName;
     private String firstName;

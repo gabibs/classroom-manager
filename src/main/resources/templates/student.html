@@ -1,22 +1,41 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+</style>
+
 <head>
   <title>Alumno</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
+
 <body>
+  <div>
+    <a href="http://localhost:8080/" type="submit">VOLVER</a>
+  </div>
   <h1>Instituto de Investigaciones Filológicas Emilio Disi</h1>
   <h2>Alta/Modificación Alumno</h2>
   <div class="container">
-    <form action="action_page.php">
+    <form th:action="@{/student}" th:object="${student}" method="POST">
       <div class="row">
         <div class="col-25">
           <label for="apellido">Apellido</label>
         </div>
         <div class="col-75">
-          <input type="text" id="apellido" name="apellido" placeholder="Ingrese Apellido/s">
+          <input type="text" id="apellido" name="apellido" placeholder="">
         </div>
       </div>
       <div class="row">
@@ -24,7 +43,7 @@
           <label for="nombre">Nombre/s</label>
         </div>
         <div class="col-75">
-          <input type="text" id="nombre" name="nombre" placeholder="Ingrese nombre/s">
+          <input type="text" id="nombre" name="nombre" placeholder="">
         </div>
       </div>
       <div class="row">
@@ -32,7 +51,7 @@
           <label for="country">DNI</label>
         </div>
         <div class="col-75">
-          <input type="text" id="dni" name="dni" placeholder="xx.xxx.xxx">
+          <input type="text" id="dni" name="dni" placeholder="">
         </div>
       </div>
       <div class="row">
@@ -40,7 +59,7 @@
           <label for="dni">Dirección</label>
         </div>
         <div class="col-75">
-          <input type="text" id="dirección" name="dni" placeholder="Ingrese dirección">
+          <input type="text" id="dirección" name="dni" placeholder="">
         </div>
       </div>
       <div class="row">
@@ -48,7 +67,7 @@
           <label for="telefono">Teléfono</label>
         </div>
         <div class="col-75">
-          <input type="tel" id="telefono" name="telefono" placeholder="+54 9 221 5555555">
+          <input type="tel" id="telefono" name="telefono" placeholder="">
         </div>
       </div>
       <div class="row">
@@ -56,7 +75,7 @@
           <label for="email">Mail</label>
         </div>
         <div class="col-75">
-          <input type="email" id="email" name="email" placeholder="nombre_de_usuario@ejemplo.com">
+          <input type="email" id="email" name="email" placeholder="">
         </div>
       </div>
       <div class="row">
@@ -64,7 +83,7 @@
           <label for="score">Promedio actual</label>
         </div>
         <div class="col-75">
-          <input type="text" id="score" name="score" placeholder="Sin calificaciones disponibles">
+          <input type="text" id="score" name="score" placeholder="">
         </div>
       </div>
       <div class="row">
@@ -72,14 +91,34 @@
           <label for="approved">Aprobado</label>
         </div>
         <div class="col-75">
-          <input type="text" id="approved" name="approved" placeholder="Sin promedio disponibles">
+          <input type="text" id="approved" name="approved" placeholder="">
         </div>
       </div>
       <div class="row">
         <button type="reset">CANCELAR</button>
-        <button type="submit" th:action="@/student" th:object="${student}" method="POST">GUARDAR</button>
+        <button type="submit">GUARDAR</button>
       </div>
     </form>
+    <div>
+      <table>
+        <tr>
+          <th>Legajo</th>
+          <th>Apellido</th>
+          <th>DNI</th>
+        </tr>
+        <tr th:if="${students.empty}">
+          <td colspan="2"> No existen estudiantes</td>
+        </tr>
+        <tr th:each="student : ${allStudents}">
+          <td><span th:text="${student.id}"> Legajo </span></td>
+          <td><span th:text="${student.personalInformation.lastName}"> Apellido </span></td>
+          <td><span th:text="${student.personalInformation.dni}"> DNI </span></td>
+          <td><span th: if="{student.courses != null}" th:text="${student.courses}"> Curso </span></td>
+          <td><a th:href="@{'/student?id=' + ${student.id}}" th:method="get">Editar</a></td>
+          <td><a th:href="@{'/deleteStudent/' + ${student.id}}" th:method="delete">Borrar</a></td>
+        </tr>
+      </table>
+    </div>
   </div>
 </body>
 

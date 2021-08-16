@@ -12,6 +12,7 @@ import java.util.List;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -32,8 +33,8 @@ public class CourseController {
         } else {
             model.addAttribute("course", new Course());
         }
-        model.addAttribute("course", courseService.findAllCourses(name, yearOfEdition));
-        return "classroom"; // template
+        model.addAttribute("courses", courseService.findAllCourses(name, yearOfEdition));
+        return "course"; // template
     }
 
     // modificar/guardar curso
@@ -57,23 +58,23 @@ public class CourseController {
     }
 
     // eliminar curso
-    @PostMapping("/deleteCourse")
-    public String courseDelete(@ModelAttribute Course course) {
+    @PostMapping("/deleteCourse/{id}")
+    public String courseDelete(@ModelAttribute Course course, @PathVariable Integer id) {
         courseService.deleteCourse(course);
         return "course";
     }
 
     // eliminar estudiante de curso
-    @PostMapping("/deleteStudentFromCourse")
-    public String deleteStudentFromCourse(@ModelAttribute Course course, Student student) {
-        courseService.deleteStudentFromCourse(student, course);
+    @PostMapping("/deleteStudentFromCourse/{studentId}")
+    public String deleteStudentFromCourse(@ModelAttribute Course course, @PathVariable Integer studentId) {
+        courseService.deleteStudentFromCourse(studentId, course);
         return "course";
     }
 
     // agregar estudiante a curso
-    @PostMapping("/saveStudentToCourse")
-    public String saveStudentToCourse(@ModelAttribute Course course, Student student) {
-        courseService.saveStudentToCourse(student, course);
+    @PostMapping("/saveStudentToCourse/{id}")
+    public String saveStudentToCourse(@ModelAttribute Course course, @PathVariable Integer studentId, Student student) {
+        courseService.saveStudentToCourse(studentId, course);
         return "course";
     }
 

@@ -2,9 +2,9 @@ package com.gbettaglio.classroommanager.services;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import com.gbettaglio.classroommanager.entities.Course;
-import com.gbettaglio.classroommanager.entities.Student;
 import com.gbettaglio.classroommanager.entities.StudentCourse;
 import com.gbettaglio.classroommanager.entities.Teacher;
 import com.gbettaglio.classroommanager.exceptions.FullClassException;
@@ -22,18 +22,18 @@ public class CourseService {
     @Autowired
     StudentRepository studentRepository;
 
-    public void saveStudentToCourse(Student student, Course course) {
+    public void saveStudentToCourse(Integer studentId, Course course) {
         try {
-            course.saveStudent(student);
+            course.saveStudent(studentRepository.findById(studentId).orElseThrow());
             courseRepository.save(course);
         } catch (FullClassException | UnexistingClassroom e) {
 
         }
     }
 
-    public void deleteStudentFromCourse(Student student, Course course) {
+    public void deleteStudentFromCourse(Integer studentId, Course course) {
         List<StudentCourse> filteredList = course.getStudentsList().stream()
-                .filter(studentCourse -> studentCourse.getStudent().getId().equals(student.getId()))
+                .filter(studentCourse -> studentCourse.getStudent().getId().equals(studentId))
                 .collect(Collectors.toList());
         course.setStudentsList(filteredList);
         courseRepository.save(course);
@@ -52,6 +52,11 @@ public class CourseService {
 
     public List<Course> findAllCourses(String name, String yearOfEdition) {
         return courseRepository.findAllByNameContainsAndYearOfEditionContains(name, yearOfEdition);
+
+    }
+
+    public List<Course> findAllCourses() {
+        return StreamSupport.stream(courseRepository.findAll().spliterator(), false).collect(Collectors.toList());
 
     }
 

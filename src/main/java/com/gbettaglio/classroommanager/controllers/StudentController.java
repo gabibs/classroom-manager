@@ -20,34 +20,35 @@ public class StudentController {
 	StudentService studentService;
 
 	@GetMapping("/student") // html
-	public String managerForm(@RequestParam(name = "dni", required = false) String lastName, String dni, Model model) {
-		if (dni != null) {
+	public String managerForm(@RequestParam(name = "lastName", required = false) String lastName,
+			@RequestParam(name = "dni", required = false) String dni, Model model) {
+		if (dni != null && lastName != null) {
 			model.addAttribute("student", studentService.getStudent(lastName, dni));
 		} else {
 			model.addAttribute("student", new Student());
 		}
-		model.addAttribute("student", studentService.getStudent(lastName, dni));
-		return "classroom"; // template
+		model.addAttribute("students", studentService.getAllStudents());
+		return "student"; // template
 	}
 
 	// modificar/guardar nuevo
 	@PostMapping("/student")
-	public String studentSubmit(@RequestParam(value = "dni", required = false) String lastName, String dni, Model model,
-			Student student) {
+	public String studentSubmit(@RequestParam(value = "lastName", required = false) String lastName,
+			@RequestParam(value = "dni", required = false) String dni, Model model, Student student) {
 		studentService.saveStudent(student);
 		model.addAttribute("student", new StudentService());
-		List<Student> allStudents = studentService.getAllStudents(lastName, dni);
-		model.addAttribute("allStudents", allStudents);
+		List<Student> students = studentService.getAllStudents(lastName, dni);
+		model.addAttribute("students", students);
 		return "student";
 	}
 
 	// eliminar
-	@PostMapping("/deleteStudent/{dni}")
-	public String deleteStudent(@PathVariable Student student, Model model, String lastName, String dni) {
+	@PostMapping("/deleteStudent/{dni}/{lastName}")
+	public String deleteStudent(Student student, Model model, @PathVariable String lastName, @PathVariable String dni) {
 		studentService.deleteStudent(student);
 		model.addAttribute("student", new Student()); // data
-		List<Student> allStudents = studentService.getAllStudents(lastName, dni);
-		model.addAttribute("student", allStudents);
+		List<Student> students = studentService.getAllStudents(lastName, dni);
+		model.addAttribute("students", students);
 		return "student";
 	}
 
@@ -55,8 +56,8 @@ public class StudentController {
 	@GetMapping("/studentSearch")
 	public String studentForm(@RequestParam(value = "dni", required = false) String dni,
 			@RequestParam(value = "lastName", required = false) String lastName, Model model) {
-		List<Student> studentList = studentService.getAllStudents(dni, lastName);
-		model.addAttribute("studentList", studentList);
+		List<Student> students = studentService.getAllStudents(dni, lastName);
+		model.addAttribute("students", students);
 		return "student";
 
 	}

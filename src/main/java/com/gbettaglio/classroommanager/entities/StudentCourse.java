@@ -1,9 +1,10 @@
 package com.gbettaglio.classroommanager.entities;
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Data
 @NoArgsConstructor
@@ -11,6 +12,7 @@ import javax.persistence.*;
 public class StudentCourse {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne
     private Student student;
@@ -18,5 +20,4 @@ public class StudentCourse {
     private Course course;
     private Float score;
 
-    
 }
