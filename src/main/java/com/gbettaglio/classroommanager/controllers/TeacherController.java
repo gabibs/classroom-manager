@@ -22,7 +22,7 @@ public class TeacherController {
     @GetMapping("/teacher") // html
     public String managerForm(@RequestParam(name = "lastName", required = false) String lastName,
             @RequestParam(name = "dni", required = false) String dni, Model model) {
-        if (dni != null) {
+        if (dni != null && lastName != null) {
             model.addAttribute("teacher", teacherService.getTeacher(lastName, dni));
         } else {
             model.addAttribute("teacher", new Teacher());
@@ -33,8 +33,13 @@ public class TeacherController {
 
     // modificar/guardar nuevo
     @PostMapping("/teacher")
-    public String teacherSubmit(String lastName, @RequestParam(value = "dni", required = false) String dni, Model model,
-            Teacher teacher) {
+    public String teacherSubmit(@RequestParam(value = "lastName", required = false) String lastName,
+            @RequestParam(value = "dni", required = false) String dni, Model model,
+            @RequestParam(value = "teacher", required = false) Teacher teacher,
+            @RequestParam(value = "id", required = false) Integer id) {
+        if (id != null) {
+            teacher.setId(id);
+        }
         teacherService.saveTeacher(teacher);
         model.addAttribute("teacher", new TeacherService());
         List<Teacher> teachers = teacherService.getAllTeachers();

@@ -26,9 +26,10 @@ public class CourseController {
 
     // mapear curso
     @GetMapping("/course") // html
-    public String managerForm(@RequestParam(name = "name", required = false) Integer id, Model model, String name,
-            String yearOfEdition) {
-        if (id != null) {
+    public String managerForm(@RequestParam(name = "id", required = false) Integer id, Model model,
+            @RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "yearOfEdition", required = false) String yearOfEdition) {
+        if (id != null && name != null && yearOfEdition != null) {
             model.addAttribute("course", courseService.findCourse(name, yearOfEdition));
         } else {
             model.addAttribute("course", new Course());
@@ -39,7 +40,10 @@ public class CourseController {
 
     // modificar/guardar curso
     @PostMapping("/course")
-    public String classroomSubmit(@ModelAttribute Course course, String name, String yearOfEdition) {
+    public String classroomSubmit(@ModelAttribute Course course, String name, String yearOfEdition, Integer id) {
+        if (id != null) {
+            course.setId(id);
+        }
         courseService.saveCourse(course);
         model.addAttribute("course", new CourseService());
         List<Course> allCourses = courseService.findAllCourses(name, yearOfEdition);

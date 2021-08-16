@@ -34,7 +34,10 @@ public class StudentController {
 	// modificar/guardar nuevo
 	@PostMapping("/student")
 	public String studentSubmit(@RequestParam(value = "lastName", required = false) String lastName,
-			@RequestParam(value = "dni", required = false) String dni, Model model, Student student) {
+			@RequestParam(value = "dni", required = false) String dni, Model model, Student student, Integer id) {
+		if (id != null) {
+			student.setId(id);
+		}
 		studentService.saveStudent(student);
 		model.addAttribute("student", new StudentService());
 		List<Student> students = studentService.getAllStudents(lastName, dni);
