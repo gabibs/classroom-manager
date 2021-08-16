@@ -80,6 +80,14 @@
       </div>
       <div class="row">
         <div class="col-25">
+          <label for="admissionDate">Fecha de Ingreso</label>
+        </div>
+        <div class="col-75">
+          <input type="date" id="admissionDate" name="admissionDate">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
           <label for="score">Promedio actual</label>
         </div>
         <div class="col-75">
@@ -109,11 +117,12 @@
         <tr th:if="${students.empty}">
           <td colspan="2"> No existen estudiantes</td>
         </tr>
-        <tr th:each="student : ${allStudents}">
-          <td><span th:text="${student.id}"> Legajo </span></td>
-          <td><span th:text="${student.personalInformation.lastName}"> Apellido </span></td>
-          <td><span th:text="${student.personalInformation.dni}"> DNI </span></td>
-          <td><span th: if="{student.courses != null}" th:text="${student.courses}"> Curso </span></td>
+        <tr th:each="student : ${students}">
+          <td><span th:text="${student.id}"></span></td>
+          <td><span th:text="${student.personalInformation.lastName}"></span></td>
+          <td><span th:text="${student.personalInformation.dni}"></span></td>
+          <td><span th:text="${student.personalInformation.admissionDate}"></span></td>
+          <td><span th: if="{student.courses != null}" th:text="${student.courses}"></span></td>
           <td><a th:href="@{'/student?id=' + ${student.id}}" th:method="get">Editar</a></td>
           <td><a th:href="@{'/deleteStudent/' + ${student.id}}" th:method="delete">Borrar</a></td>
         </tr>

@@ -26,53 +26,57 @@
     </div>
     <h1>Instituto de Investigaciones Filológicas Emilio Disi</h1>
     <h2>Alta/Modificación de Curso</h2>
-    <div class="topnav">
-
-        <div class="search-container">
-            <form th:action="@{/course}" th:object="${course}" method="POST">
-                <div>
-                    <label for="searchCourse">Ingrese nombre del Curso</label>
-                    <input type="text" placeholder="" name="searchCourse">
-                    <label for="student">Ingrese Apellido del estudiante </label>
-                    <input type="text" placeholder="" name="student">
-                    <label for="student">Ingrese DNI del estudiante</label>
-                    <input type="text" placeholder="" name="student">
-                    <button type="reset">CANCELAR</button>
-                    <button type="submit">SUBMITIR</button>
-                </div>
-
-                <label for="teacher">Ingrese Profesor (sólo en caso de ingresar un nuevo curso)</label>
-                <input type="text" placeholder="Ingrese Apellido del Profesor" name="teacher">
-                <button type="reset">CANCELAR</button>
-                <button type="submit">SUBMITIR</button>
-            </form>
-            <div>
-                <table>
-                    <tr>
-                        <th>Curso</th>
-                        <th>Apellido Profesor</th>
-                        <th>Alumno - Legajo N°</th>
-                        <th>Apellido Alumno</th>
-                        <th>Nota</th>
-                        <th>Aprobado</th>
-                    </tr>
-                    <tr th:if="${courses.empty}">
-                        <td colspan="2"> No existen cursos</td>
-                    </tr>
-                    <tr th:each="course : ${courses}">
-                        <td><span th:text="${course.name}"> Curso </span></td>
-                        <td><span th:text="${teacher.personalInformation.lastName}"> Apellido </span></td>
-                        <td><span th:text="${student.id}"> Alumno - Legajo N° </span></td>
-                        <td><span th:text="${student.personalInformation.lastName}"> Apellido </span></td>
-                        <td><span th:text="${student.score}"> Nota </span></td>
-                        <td><span th:if="${student.score >= 4}"> Sí </span></td>
-                        <td><span th:if="${student.score < 4}"> No </span></td>
-                        <td><a th:href="@{'/course?id=' + ${course.id}}" th:method="get">Editar</a></td>
-                        <td><a th:href="@{'/deleteCourse/' + ${course.id}}" th:method="delete">Borrar</a></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+    <div th:if="${course.id == null}">
+        <h2>Crear curso</h2>
+        <form action="#" th:action="@{/course}" th:object="${course}" method="post">
+            <p>Nombre: <input type="text" th:field="*{name}" /></p>
+            <p>Fecha de inicio: <input type="date" th:field="*{startDate}" /></p>
+            <p>Año de Edición: <input type="text" th:field="*{yearOfEdition}" /></p>
+            <p>Precio: <input type="number" th:field="*{price}" /></p>
+            <p>Horario: <input type="text" th:field="*{schedule}" /></p>
+            <p>Aula: <input type="number" th:field="*{classroom?id}" /></p>
+            <p>Profesor: <input type="number" th:field="*{course.teacher?id}" /></p>
+            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        </form>
+    </div>
+    <div th:if="${course.id != null}">
+        <h2>Editar curso</h2>
+        <form action="#" th:action="@{'/course?id=' + ${course.id}}" th:object="${course}" method="post">
+            <p>Nombre: <input type="text" th:field="*{name}" /></p>
+            <p>Fecha de inicio: <input type="date" th:field="*{startDate}" /></p>
+            <p>Año de Edición: <input type="text" th:field="*{yearOfEdition}" /></p>
+            <p>Precio: <input type="number" th:field="*{price}" /></p>
+            <p>Horario: <input type="text" th:field="*{schedule}" /></p>
+            <p>Aula: <input type="number" th:field="*{classroom?id}" /></p>
+            <p>Profesor: <input type="number" th:field="*{course.teacher?id}" /></p>
+            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        </form>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>Curso</th>
+                <th>Apellido Profesor</th>
+                <th>Alumno - Legajo N°</th>
+                <th>Apellido Alumno</th>
+                <th>Nota</th>
+                <th>Aprobado</th>
+            </tr>
+            <tr th:if="${courses.empty}">
+                <td colspan="2"> No existen cursos</td>
+            </tr>
+            <tr th:each="course : ${courses}">
+                <td><span th:text="${course.name}"> Curso </span></td>
+                <td><span th:text="${teacher.personalInformation.lastName}"> Apellido </span></td>
+                <td><span th:text="${student.id}"> Alumno - Legajo N° </span></td>
+                <td><span th:text="${student.personalInformation.lastName}"> Apellido </span></td>
+                <td><span th:text="${student.score}"> Nota </span></td>
+                <td><span th:if="${student.score >= 4}"> Sí </span></td>
+                <td><span th:if="${student.score < 4}"> No </span></td>
+                <td><a th:href="@{'/course?id=' + ${course.id}}" th:method="get">Editar</a></td>
+                <td><a th:href="@{'/deleteCourse/' + ${course.id}}" th:method="delete">Borrar</a></td>
+            </tr>
+        </table>
     </div>
 </body>
 

@@ -39,7 +39,7 @@ public class StudentController {
 		model.addAttribute("student", new StudentService());
 		List<Student> students = studentService.getAllStudents(lastName, dni);
 		model.addAttribute("students", students);
-		return "student";
+		return "student"; // Added admissionDate as @RequestParam
 	}
 
 	// eliminar
@@ -53,7 +53,7 @@ public class StudentController {
 	}
 
 	// búsqueda
-	@GetMapping("/studentSearch")
+	@GetMapping("/searchStudent")
 	public String studentForm(@RequestParam(value = "dni", required = false) String dni,
 			@RequestParam(value = "lastName", required = false) String lastName, Model model) {
 		List<Student> students = studentService.getAllStudents(dni, lastName);

@@ -33,8 +33,8 @@ public class TeacherController {
 
     // modificar/guardar nuevo
     @PostMapping("/teacher")
-    public String classroomSubmit(String lastName, @RequestParam(value = "dni", required = false) String dni,
-            Model model, Teacher teacher) {
+    public String teacherSubmit(String lastName, @RequestParam(value = "dni", required = false) String dni, Model model,
+            Teacher teacher) {
         teacherService.saveTeacher(teacher);
         model.addAttribute("teacher", new TeacherService());
         List<Teacher> teachers = teacherService.getAllTeachers();
@@ -53,7 +53,7 @@ public class TeacherController {
     }
 
     // búsqueda
-    @GetMapping("/teacherSearch/{dni}")
+    @GetMapping("/searchTeacher/{dni}")
     public String teacherForm(@PathVariable String dni,
             @RequestParam(value = "lastName", required = false) String lastName, Model model) {
         List<Teacher> teachers = teacherService.getAllTeachers(dni, lastName);

@@ -2,10 +2,13 @@ package com.gbettaglio.classroommanager.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
+@ToString
 @Data
 @NoArgsConstructor
 @Entity

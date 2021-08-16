@@ -11,6 +11,8 @@ import com.gbettaglio.classroommanager.exceptions.FullClassException;
 import com.gbettaglio.classroommanager.exceptions.UnexistingClassroom;
 import com.gbettaglio.classroommanager.repository.CourseRepository;
 import com.gbettaglio.classroommanager.repository.StudentRepository;
+import com.gbettaglio.classroommanager.repository.TeacherRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,9 @@ public class CourseService {
 
     @Autowired
     StudentRepository studentRepository;
+
+    @Autowired
+    TeacherRepository teacherRepository;
 
     public void saveStudentToCourse(Integer studentId, Course course) {
         try {
@@ -66,7 +71,7 @@ public class CourseService {
     }
 
     public void addTeacher(Teacher teacher, Course course) {
-        course.setTeachers(teacher);
+        course.setTeacher(teacher);
         this.saveCourse(course);
     }
 

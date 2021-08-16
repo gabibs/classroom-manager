@@ -78,6 +78,14 @@
             </div>
             <div class="row">
                 <div class="col-25">
+                    <label for="admissionDate">Fecha de Ingreso</label>
+                </div>
+                <div class="col-75">
+                    <input type="date" id="admissionDate" name="admissionDate">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
                     <label for="titulo">Título Profesional</label>
                 </div>
                 <div class="col-75">
@@ -109,8 +117,8 @@
                 </tr>
                 <tr th:each="teacher : ${teachers}">
                     <td><span th:text="${teacher.id}"> Legajo </span></td>
-                    <td><span th:text="${teacher.personalInformation.lastName}"> Apellido </span></td>
-                    <td><span th:text="${teacher.personalInformation.dni}"> DNI </span></td>
+                    <td><span th:text="${teacher.personalInformation.lastName}"></span></td>
+                    <td><span th:text="${teacher.personalInformation.dni}"></span></td>
                     <td><a th:href="@{'/teacher?id=' + ${teacher.id}}" th:method="get">Editar</a></td>
                     <td><a th:href="@{'/deleteTeacher/' + ${teacher.id}}" th:method="delete">Borrar</a></td>
                 </tr>

@@ -5,6 +5,7 @@ import com.gbettaglio.classroommanager.exceptions.UnexistingClassroom;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@ToString
 @Data
 @NoArgsConstructor
 @Entity
@@ -29,7 +31,7 @@ public class Course {
     @OneToOne
     private Classroom classroom;
     @ManyToOne
-    private Teacher teachers;
+    private Teacher teacher;
     @OneToMany
     private List<StudentCourse> studentsList = new ArrayList<StudentCourse>();
 
@@ -51,4 +53,5 @@ public class Course {
             this.studentsList.add(studentCourse);
         }
     }
+
 }

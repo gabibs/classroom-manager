@@ -2,6 +2,7 @@ package com.gbettaglio.classroommanager.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.time.LocalDate;
 
+@ToString
 @Data
 @NoArgsConstructor
 @Entity
