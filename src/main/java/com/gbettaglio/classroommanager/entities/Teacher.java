@@ -23,8 +23,8 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @OneToOne
-    private PersonalInformation personalInformation;
+    public PersonalInformation personalInformation;
     @OneToMany
-    private List<Course> courses;
+    public List<Course> courses;
 
 }

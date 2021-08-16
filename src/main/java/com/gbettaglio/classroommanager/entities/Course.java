@@ -29,11 +29,11 @@ public class Course {
     private Double price = 0.00d;
     private String schedule;
     @OneToOne
-    private Classroom classroom;
+    public Classroom classroom;
     @ManyToOne
-    private Teacher teacher;
+    public Teacher teacher;
     @OneToMany
-    private List<StudentCourse> studentsList = new ArrayList<StudentCourse>();
+    public List<StudentCourse> studentsList = new ArrayList<StudentCourse>();
 
     public LocalDate getEndDate() {
         return startDate.plusMonths(6);

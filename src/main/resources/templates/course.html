@@ -44,11 +44,13 @@
         <form action="#" th:action="@{'/course?id=' + ${course.id}}" th:object="${course}" method="post">
             <p>Nombre: <input type="text" th:field="*{name}" /></p>
             <p>Fecha de inicio: <input type="date" th:field="*{startDate}" /></p>
+            <p>Fecha de Finalización: <input type="date" th:field="*{endDate}" /></p>
             <p>Año de Edición: <input type="text" th:field="*{yearOfEdition}" /></p>
             <p>Precio: <input type="number" th:field="*{price}" /></p>
             <p>Horario: <input type="text" th:field="*{schedule}" /></p>
             <p>Aula: <input type="number" th:field="*{classroom?id}" /></p>
             <p>Profesor: <input type="number" th:field="*{course.teacher?id}" /></p>
+            <p>Alumnos inscriptos: <input type="text" th:field="*{course.studentsList}" /></p>
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
         </form>
     </div>

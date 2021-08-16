@@ -23,9 +23,9 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @OneToOne
-    private PersonalInformation personalInformation;
-    private Boolean approved;
+    public PersonalInformation personalInformation;
+    public Boolean approved;
     @OneToMany
-    private List<StudentCourse> courses;
+    public List<StudentCourse> courses;
 
 }
